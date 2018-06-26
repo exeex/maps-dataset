@@ -21,9 +21,9 @@ def pad_along_axis(array: np.ndarray, target_length, axis=0):
     axis_nb = len(array.shape)
 
     if pad_size < 0:
-        return array
+        return array.take(indices=range(target_length), axis=axis)
 
-    npad = [(0, 0) for x in range(axis_nb)]
+    npad = [(0, 0) for _ in range(axis_nb)]
     npad[axis] = (0, pad_size)
 
     b = np.pad(array, pad_width=npad, mode='constant', constant_values=0)
